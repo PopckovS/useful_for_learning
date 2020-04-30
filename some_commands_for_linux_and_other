@@ -9,6 +9,13 @@
 
 Обновление всей системы
     sudo apt-get update
+    sudo apt-get upgrade
+
+Установка утилиты для разархивации zip архивов
+    sudo apt install unzip
+    Использование:
+        Распакует и в указанную папку, и создаст эту папку если ее не существует.
+        unzip имя_файла.zip -d /tmp
 
 Установка КУРЛОВ(curl) для Linux, ее можно импользовать для скачивания.
     sudo apt install curl
@@ -18,6 +25,17 @@
 
 Установка tweak
     sudo apt install gnome-tweaks
+
+
+По умолчанию в LINUX установлен браузер Mozilla
+Теперь установим браузер Google Chrom:
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    Прикрепление ключа репозитория
+    sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+    Обновляем, для добавления репозитория
+    sudo apt-get update
+    Установка самого браузера
+    sudo apt-get install google-chrome-stable
 
 
 Все для APACHE2
@@ -232,10 +250,67 @@ SSH и работа с ним
 
 
 
+=============== Установка Docker ===============
+    Официальный сайт с установкой на Ubuntu - https://docs.docker.com/engine/install/ubuntu/
+
+    Обновляем
+        sudo apt-get update
+    Установка пакетов для установки Composer
+        sudo apt-get install \
+            apt-transport-https \
+            ca-certificates \
+            curl \
+            gnupg-agent \
+            software-properties-common
+
+    Добавляем ключ
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        Получаем ответ: ОК
+
+    Сравниваем отпечаток, последние символы отпечатка долэжны совпадать.
+         sudo apt-key fingerprint 0EBFCD88
+
+        Получаем ответ:
+            pub   rsa4096 2017-02-22 [SCEA]
+                  9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+            uid           [ unknown] Docker Release (CE deb) <docker@docker.com>
+            sub   rsa4096 2017-02-22 [S]
+
+    Добавляем в список ресурсов репозиторий в котором находятся пакеты для установки Docker
+    Это стабильный репозиторий,
+        sudo add-apt-repository \
+           "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+           $(lsb_release -cs) \
+           stable"
+    Это добавит наш список sources.list
+    Вот эти строки - deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+    Тем самым мы получим возможность подсасывать нужные библиотеки из репозиториев.
+
+    Установка самого DOCKER
+        Обновляем систему
+            sudo apt-get update
+        Установка Docker Community Edition
+            sudo apt-get install docker-ce
+        В Docker усть специальная команда для проверки корректности установленного Доккера
+            sudo docker run hello-world
+
+        Скачать и запустить образ и перейти в нутрь образ, это для образа Ubuntu и его интерпретатора bash:
+            docker run -it ubuntu bash
+            Для выхода из образа
+                exit
 
 
 
+=============== Установка Docker-Compose ===============
+    Установка по инструкции с сайта - https://docs.docker.com/compose/install/
+        Курлами скачивем бинарный файл для компоуза
+            sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        Даем права на запуск бинарного файла:
+            sudo chmod +x /usr/local/bin/docker-compose
+        Проверка версии docker-compose
+            docker-compose --version
 
+Технология Docker Compose, если описывать её упрощённо, позволяет, с помощью одной команды, запускать множество сервисов.
 
 
 
