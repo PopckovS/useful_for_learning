@@ -9,7 +9,14 @@
 
 Обновление всей системы
     sudo apt-get update
-    sudo apt-get upgrade
+        Обновление apt обновляет базу данных пакетов.если у вас установлен пакет XYZ версии 1.3,
+        после apt update база данных будет знать, что доступна более новая версия (1.4).
+    sudo apt-get upgrade -y
+        Когда вы выполняете apt upgrade, у вас произойдет непосредственное обновление
+        установленных пакетов на их более новые версии.
+    Что такое -y ??? Это соглашение, иногда требуется дать согласие, установка ключа -y дает это согласие сразу
+
+
 
 Установка утилиты для разархивации zip архивов
     sudo apt install unzip
@@ -104,6 +111,7 @@
             Y
         sudo apt install php7.2-curl
             Y
+        sudo apt install php7.2-pgsql
 
     Список включеных модулей
         php -m
@@ -149,22 +157,22 @@
 
 
 Настройка виртуального хоста в Linux
-sis
+localhost
     Создаем файл с названием хоста для конфигураций этого хоста
-        sudo nano /etc/apache2/sites-available/sis.loc.conf
+        sudo nano /etc/apache2/sites-available/localhost.loc.conf
 
 И добавляем туда эту запись с конфигурацией локал хоста
 <VirtualHost *:80>
-    ServerName sis.loc
-    ServerAlias  sis
+    ServerName localhost.loc
+    ServerAlias  localhost
 
-    DocumentRoot /var/www/sis/web
-    <Directory /var/www/sis/web>
+    DocumentRoot /var/www/localhost/public
+    <Directory /var/www/localhost/public>
         AllowOverride All
     </Directory>
 
-    CustomLog /var/log/apache2/sis.access.log common
-    ErrorLog  /var/log/apache2/sis.error.log
+    CustomLog /var/log/apache2/localhost.access.log common
+    ErrorLog  /var/log/apache2/localhost.error.log
     LogLevel warn
 </VirtualHost>
 
@@ -173,7 +181,7 @@ sis
     Для того чтобы использовать домен необходимо выполнить следующую команду,
     которая создает символическую ссылку из sites-available/ в sites-enabled/
     для активации созданного Вами виртуального хоста:
-        sudo a2ensite sis.loc
+        sudo a2ensite localhost.loc
 
     Перезагрузка
         sudo service apache2 reload
@@ -182,7 +190,7 @@ sis
         sudo nano /etc/hosts
 
     Добавляем эту запись
-        127.0.0.1 sis.loc
+        127.0.0.1 localhost.loc
 
 
 
@@ -249,6 +257,11 @@ SSH и работа с ним
 
 
 
+============== Установка Skype ================
+    sudo snap install skype --classic
+    Запуск
+        skype
+    При регистрации, потребует регистрацию аккаунта на Microsoft
 
 =============== Установка Docker ===============
     Официальный сайт с установкой на Ubuntu - https://docs.docker.com/engine/install/ubuntu/
@@ -311,6 +324,37 @@ SSH и работа с ним
             docker-compose --version
 
 Технология Docker Compose, если описывать её упрощённо, позволяет, с помощью одной команды, запускать множество сервисов.
+
+
+
+
+
+
+Установка Node.js /* Пос тандарту для Linux Ubuntu это версия 8.11 */
+    sudo apt update
+    sudo apt install nodejs
+Установка загрузчика пакетов npm для Node.js
+    sudo apt install npm
+    nodejs -v
+
+
+
+Установка Yarn на Node.js
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+    sudo apt update && sudo apt install yarn
+    sudo apt update && sudo apt install --no-install-recommends yarn
+
+    yarn --version
+
+
+=================== Далее если мы работаем с Symfony =======================
+То нам следует установить через Encore
+    composer require encore
+    yarn install
+Запуск сервера npm
+    npm run dev-server
 
 
 

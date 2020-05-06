@@ -1,0 +1,71 @@
+/** ======================= Работа с Docker и Docker-Compose ======================= **/
+
+Dockerfile - отвечает за организацию среды работы сервера.
+Dockerfile всегда должен начинаться с импорта базового образа. Для этого используется ключевое слово 'FROM'.
+
+FROM - Установка основоного образа
+    FROM ubuntu:18.04  - Запуск основного орбраза, а именно Линукс Убунту нужной версии.
+    FROM python:latest - Запуск основного образа, скачать и установить послед. версию языка Python.
+
+ENV - Используется для установки переменных среды
+    Установка временной зоны для всей ОС в нашем контейнере
+    Установка переменнйо для указания какой версией PHP мы будем пользоваться
+    Установка путик интерпретатору php который мы будем использовать
+    ${PHPV} - Ранее созданная нами епеременная, со знначением 7.4
+    ENV TZ=Europe/Moscow
+    ENV PHPV 7.4
+    ENV PHP_INI_DIR=/etc/php/${PHPV}
+
+
+RUN — выполняет команду(в терминале образа) и создаёт слой образа. Используется для установки в контейнер пакетов.
+
+    RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+        ln - создание ссылки на
+        /usr/share/zoneinfo/Europe/Moscow - По этому пути находятся файлы с временными зонами, его мы и устанавливаем.
+        echo $TZ > /etc/timezone - Эта запись запишет нашу переменную = Europe/Moscow в файл /etc/timezone
+        Файл /etc/timezone - это файл в котором Linux берет запись о текущем расположении Место/Дата/Время
+
+    RUN add-apt-repository -y ppa:ondrej/php
+        Добавляем репозиторий для скачивания интерпретатора PHP
+
+    RUN apt-get update
+        Обновленеи пакетов в нашем контейнере
+
+    RUN apt-get -y install \
+        apache2 \
+        libapache2-mod-php${PHPV} \
+        curl \
+        nano \
+        php${PHPV} \
+        php${PHPV}-curl \
+        php${PHPV}-gd \
+        php${PHPV}-json \
+        php${PHPV}-mbstring \
+        php${PHPV}-xml \
+        php${PHPV}-pgsql \
+        php${PHPV}-sqlite \
+        php${PHPV}-soap \
+        php${PHPV}-amqp \
+        php${PHPV}-oauth \
+        php${PHPV}-zip \
+        php${PHPV}-intl \
+        php${PHPV}-bcmath \
+        zip \
+        composer
+    Это сразу целый набор команд, Установка сервера Apache2, PHP нужной версии, и множество его модулей и пакетов
+    Установка курлов, zip, и композера.
+
+    RUN apt-get -y install iproute2
+        iproute2 - Это целый набор утилит для Linux.
+
+
+
+
+
+
+
+ARG — задаёт переменные для передачи Docker во время сборки образа.
+
+
+WORKDIR — задаёт рабочую директорию для следующей инструкции.
+
