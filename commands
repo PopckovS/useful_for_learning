@@ -17,3 +17,8 @@
 
 >>  touch file.txt
     Создать файл с названием file.txt
+
+>>  mkdir DIRECTORY
+    Создает директорию
+
+

@@ -359,3 +359,23 @@ SSH и работа с ним
 
 
 
+ ==================== /** Установка VirtualBox **/ =====================
+ sudo apt install gcc make linux-headers-$(uname -r) dkms -y
+
+ Добавляем репозиторий
+    wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+    sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" >> /etc/apt/sources.list.d/virtualbox.list'
+
+ sudo apt update
+
+ Не забудьте удалить старую версию или версию из репозиториев, если она была установлена:
+    sudo apt purge virtualbox*
+
+ sudo apt install virtualbox-6.0
+    Установка самой виртуальной машины
+
+ После всего этого можно установить Виртуальную машина через приложение apt
+
+
+
