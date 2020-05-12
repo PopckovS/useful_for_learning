@@ -31,7 +31,7 @@
 
 
 Установка tweak
-    sudo apt install gnome-tweaks
+    sudo apt install gnome-tweaks -y
 
 
 По умолчанию в LINUX установлен браузер Mozilla
@@ -45,7 +45,7 @@
     sudo apt-get install google-chrome-stable
 
 
-Все для APACHE2
+  ========== /** Установка сервера APACHE2 **/ ===========
         Установка apache2
             sudo apt install apache2
 
@@ -75,7 +75,12 @@
 
 
 
-Все для MySQL
+ ========= /** Установка MySQL **/ =========
+ /**
+ При запуске HeidiSQL на Linux 20.04 столкнулся с неожиданной проблемой, вот эта ошибка в терминале при запуске Mysql
+ heidi 0035:err:winediag:SECUR32_initNTLMSP ntlm_auth was not found or is outdated. Make sure that ntlm_auth >= 3.0.25 is in your path.
+ Установка sudo apt install winbind не помогла
+ **/
     Установка
         sudo apt-get install mysql-server
     Для того чтобы установить консольный клиент MySQL выполните команду:
@@ -92,13 +97,25 @@
         FLUSH PRIVILEGES;
 
 
+ ========= /** Установка dbeaver **/ =========
+    wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | sudo apt-key add -
+    echo "deb https://dbeaver.io/debs/dbeaver-ce /" | sudo tee /etc/apt/sources.list.d/dbeaver.list
+    sudo apt-get update && sudo apt-get install dbeaver-ce
 
-Установка Wine
+    Установка через PPA:
+    sudo add-apt-repository ppa:serge-rider/dbeaver-ce
+    sudo apt-get update
+    sudo apt-get install dbeaver-ce
+
+
+
+
+ ========= /** Установка Wine **/ =========
     sudo apt install wine-stable
 
 
 
-Установка PHP
+ ========= /** Установка PHP как модуль Apache2 **/ =========
     sudo apt-get install php
     sudo add-apt-repository ppa:ondrej/php
         press ENTER
@@ -107,11 +124,7 @@
         Y
 
     Устанвока модулей для конкретной версии php
-        sudo apt-get install php7.2-xml php7.2-mysql php7.2-gd php7.2-mbstring php7.2-json php7.2-intl php7.2-zip
-            Y
-        sudo apt install php7.2-curl
-            Y
-        sudo apt install php7.2-pgsql
+        sudo apt-get install php7.4-xml php7.4-mysql php7.4-gd php7.4-mbstring php7.4-json php7.4-intl php7.4-zip php7.4-curl php7.4-pgsql -y
 
     Список включеных модулей
         php -m
@@ -119,27 +132,24 @@
         php --ini
 
 
-Установка Redis
-    sudo apt install redis-server
-        Y
+ ========= /** Установка Redis **/ =========
+    sudo apt install redis-server -y
 
 
-Установка Composer
-    sudo apt-get install composer
+========= /** Установка Composer **/ =========
+    sudo apt-get install composer -y
 
 
-Установка FileZilla
-    sudo apt-get install filezilla
+========= /** Установка FileZilla **/ =========
+    sudo apt-get install filezilla -y
 
 
-Установка DBeaver и PostgreSQL
+========= /** Установка PostgreSQL **/ =========
     sudo apt update
-    sudo apt install postgresql postgresql-contrib
-
-    Также нужно устанвоить DBeaver - это можно сделать через обычный установщик
+    sudo apt install postgresql postgresql-contrib -y
 
 
-
+========= /** Установка Cisco Annyconnect **/ =========
 Установка Cisco Annyconnect, после этого Cisco будет установлен
     # С сайта http://ttcit.net/download/linux/ берем нужную версию:
         http://ttcit.net/download/linux/anyconnect-linux64-4.6.03049-predeploy-k9.tar.gz
@@ -156,7 +166,7 @@
 
 
 
-Настройка виртуального хоста в Linux
+========= /** Настройка виртуального хоста в Linux **/ =========
 localhost
     Создаем файл с названием хоста для конфигураций этого хоста
         sudo nano /etc/apache2/sites-available/localhost.loc.conf
@@ -194,28 +204,28 @@ localhost
 
 
 
-
-Установка демона ssh
-    sudo apt-get install ssh
+========= /** Установка демона ssh **/ =========
+    sudo apt-get install ssh -y
 
     Настройка
         sudo service ssh stop|start|restart
 
 
 
-
-Дискорд
+========= /** Установка Discord **/ =========
     sudo apt install snapd spand-xdg-open
     sudo snap install discord
 
 
 
-Установка Steam
+========= /** Установка Steam **/ =========
     sudo add-apt-repository multiverse
     sudo apt update
-    sudo apt install steam-installer
+    sudo apt install steam-installer -y
 
 
+
+========= /** Установка deployer **/ =========
 Установка в Linux утилит для работы Деплоера(deployer)
     Установка с официального сайта - https://deployer.org/download/
     sudo curl -LO https://deployer.org/deployer.phar
@@ -228,6 +238,8 @@ localhost
             пример dep deploy test --branch=task-107-change_section_1_structure
 
 
+
+========= /** SSH **/ =========
 SSH и работа с ним
     Ссылки для чтения - https://habr.com/en/post/122445/
     Ссылки для чтения - http://xgu.ru/wiki/ssh-copy-id
@@ -262,6 +274,7 @@ SSH и работа с ним
     Запуск
         skype
     При регистрации, потребует регистрацию аккаунта на Microsoft
+
 
 =============== Установка Docker ===============
     Официальный сайт с установкой на Ubuntu - https://docs.docker.com/engine/install/ubuntu/
