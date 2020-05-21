@@ -1,6 +1,6 @@
 Установка соединения с интернетом по pppoe через провайдера.
-    sudo nmcli con edit type pppoe con-name "justlan"
-    set pppoe.username st91209
+    sudo nmcli con edit type pppoe con-name "название_вашего_сединения"
+    set pppoe.username ваше_имя_логин
     save
     yes
     quit
@@ -25,12 +25,17 @@
         unzip имя_файла.zip -d /tmp
 
 Установка КУРЛОВ(curl) для Linux, ее можно импользовать для скачивания.
-    sudo apt install curl
-
-Установка tor, установка telegramm через tor
+    sudo apt install curl -y
 
 
-Установка tweak
+  ========== /** Установка htop **/ ===========
+    sudo apt install htop
+
+
+  ========== /** Установка ifconfig **/ ===========
+    sudo apt install net-tools
+
+  ========== /** Установка tweak **/ ===========
     sudo apt install gnome-tweaks -y
 
 
@@ -42,12 +47,12 @@
     Обновляем, для добавления репозитория
     sudo apt-get update
     Установка самого браузера
-    sudo apt-get install google-chrome-stable
+    sudo apt-get install google-chrome-stable -y
 
 
   ========== /** Установка сервера APACHE2 **/ ===========
         Установка apache2
-            sudo apt install apache2
+            sudo apt install apache2 -y
 
         Включения модуля для переопределения
             sudo a2enmod rewrite
@@ -82,7 +87,7 @@
  Установка sudo apt install winbind не помогла
  **/
     Установка
-        sudo apt-get install mysql-server
+        sudo apt-get install mysql-server -y
     Для того чтобы установить консольный клиент MySQL выполните команду:
         sudo apt-get install mysql-client
     Установка Heidi
@@ -111,17 +116,16 @@
 
 
  ========= /** Установка Wine **/ =========
-    sudo apt install wine-stable
+    sudo apt install wine-stable -y
 
 
 
  ========= /** Установка PHP как модуль Apache2 **/ =========
-    sudo apt-get install php
+    sudo apt-get install php -y
     sudo add-apt-repository ppa:ondrej/php
         press ENTER
     sudo apt-get update
-    sudo apt-get install php5.6
-        Y
+    sudo apt-get install php5.6 -y
 
     Устанвока модулей для конкретной версии php
         sudo apt-get install php7.4-xml php7.4-mysql php7.4-gd php7.4-mbstring php7.4-json php7.4-intl php7.4-zip php7.4-curl php7.4-pgsql -y
@@ -130,6 +134,7 @@
         php -m
     Список используемых конфигурационных файлов .ini
         php --ini
+
 
 
  ========= /** Установка Redis **/ =========
@@ -167,22 +172,22 @@
 
 
 ========= /** Настройка виртуального хоста в Linux **/ =========
-localhost
+cb
     Создаем файл с названием хоста для конфигураций этого хоста
-        sudo nano /etc/apache2/sites-available/localhost.loc.conf
+        sudo nano /etc/apache2/sites-available/cb.loc.conf
 
 И добавляем туда эту запись с конфигурацией локал хоста
 <VirtualHost *:80>
-    ServerName localhost.loc
-    ServerAlias  localhost
+    ServerName cb.loc
+    ServerAlias  cb
 
-    DocumentRoot /var/www/localhost/public
-    <Directory /var/www/localhost/public>
+    DocumentRoot /var/www/cb
+    <Directory /var/www/cb>
         AllowOverride All
     </Directory>
 
-    CustomLog /var/log/apache2/localhost.access.log common
-    ErrorLog  /var/log/apache2/localhost.error.log
+    CustomLog /var/log/apache2/cb.access.log common
+    ErrorLog  /var/log/apache2/cb.error.log
     LogLevel warn
 </VirtualHost>
 
@@ -191,7 +196,7 @@ localhost
     Для того чтобы использовать домен необходимо выполнить следующую команду,
     которая создает символическую ссылку из sites-available/ в sites-enabled/
     для активации созданного Вами виртуального хоста:
-        sudo a2ensite localhost.loc
+        sudo a2ensite cb.loc
 
     Перезагрузка
         sudo service apache2 reload
@@ -200,7 +205,7 @@ localhost
         sudo nano /etc/hosts
 
     Добавляем эту запись
-        127.0.0.1 localhost.loc
+        127.0.0.1 cb.loc
 
 
 
@@ -389,6 +394,59 @@ SSH и работа с ним
     Установка самой виртуальной машины
 
  После всего этого можно установить Виртуальную машина через приложение apt
+
+
+
+
+
+
+
+level_travmo_centr
+oid_of_header_org
+
+1 Это не задание а прсото описание
+2 +
+3 +
+4 +
+5
+6
+7
+8
+9
+10
+11  изменил название но местоположение не менял
+12  изменил название но местоположение не менял
+13  изменил название но местоположение не менял
+14 +
+15
+16 Надо поменять распорядок вывода уровней (их порядок вывода формируется автоматически)
+17
+18
+19 +
+20
+21
+22 Добавить поле Тип организации +
+23 Добавить поле (oid)+
+24 +
+25 +
+26 +
+27 +
+28 +
+29 +
+30 +
+31 +
+32 +
+33 +
+34 +
+35 ? Не совсем понимаю, что тут нужно сделать ?
+36 +
+37 +
+38 +
+39 +
+40 +
+41 +
+42 +
+43 +
 
 
 
